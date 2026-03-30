@@ -14,11 +14,17 @@ Este documento detalha os agentes e suas responsabilidades específicas dentro d
 
 ## Backend Core
 - **Responsabilidade Principal:**
-    - Definição da estrutura de dados e modelos (futuro).
+    - Definição da estrutura de dados e modelos.
     - Implementação da lógica de negócios central.
-    - Gerenciamento de persistência de dados (futuro).
+    - Gerenciamento de persistência de dados.
     - Autenticação e Autorização (futuro).
-- **Tecnologias:** FastAPI, Pydantic, SQLAlchemy (futuro).
+- **Tecnologias:** FastAPI, Pydantic, SQLModel, SQLAlchemy.
+
+## Data Agent
+- **Responsabilidade:** Gerenciar a persistência e recuperação de dados para as entidades principais do sistema (Usuário, Produto). Interage diretamente com o banco de dados via ORM.
+- **Tecnologias:** SQLModel, Alembic, SQLite.
+- **Entidades Gerenciadas:** User, Product.
+- **Operações:** CRUD básico (create, read, update, delete).
 
 ## Agente de Testes do Backend
 - **Responsabilidade Principal:**
