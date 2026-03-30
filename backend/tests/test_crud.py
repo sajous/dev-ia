@@ -33,8 +33,8 @@ def make_product_create(suffix: str = "1") -> ProductCreate:
     return ProductCreate(
         name=f"Product {suffix}",
         sku=f"SKU-{suffix}",
-        price=Decimal("10.00"),
-        quantity_in_stock=50,
+        price_cost=Decimal("10.00"),
+        quantity=50,
         min_stock_level=5,
         category="General",
     )
@@ -157,10 +157,12 @@ def test_get_products_with_offset_and_limit(session: Session):
 
 def test_update_product(session: Session):
     created = create_product(session, make_product_create())
-    updated = update_product(session, created.id, ProductUpdate(name="New Name", price=Decimal("20.00")))
+    updated = update_product(
+        session, created.id, ProductUpdate(name="New Name", price_cost=Decimal("20.00"))
+    )
     assert updated is not None
     assert updated.name == "New Name"
-    assert updated.price == Decimal("20.00")
+    assert updated.price_cost == Decimal("20.00")
     assert updated.sku == "SKU-1"
 
 
