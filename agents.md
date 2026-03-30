@@ -8,6 +8,12 @@ Este documento descreve os agentes de alto nível e suas responsabilidades dentr
 
 ## Claude Code
 - **Responsabilidade Principal:** Execução de ordens técnicas detalhadas, implementação de funcionalidades, escrita de testes, gerenciamento de dependências e interação com o sistema de controle de versão (Git).
+- **Capacidades:**
+  - Desenvolvimento Frontend (React, TypeScript, Tailwind CSS)
+  - Desenvolvimento Backend (FastAPI, Python, SQLite)
+  - Implementação de Testes (100% de cobertura)
+  - Refatoração de Código
+  - **Documentação**
 - **Interage com:** Arquiteto Líder, Backend Agent, Frontend Agent.
 
 ## Backend Agent

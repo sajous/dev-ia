@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from database import create_db_and_tables
 from app.api.auth import router as auth_router
 from app.api.products import router as products_router
+from app.api.admin import router as admin_router
 
 aplicacao = FastAPI()
 
@@ -18,3 +19,4 @@ def verificar_saude():
 
 aplicacao.include_router(auth_router)
 aplicacao.include_router(products_router)
+aplicacao.include_router(admin_router)
