@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from database import create_db_and_tables
 from app.api.auth import router as auth_router
 from app.api.products import router as products_router
@@ -6,6 +7,14 @@ from app.api.admin import router as admin_router
 from app.api.users import router as users_router
 
 aplicacao = FastAPI()
+
+aplicacao.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @aplicacao.on_event("startup")

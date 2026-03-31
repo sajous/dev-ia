@@ -38,10 +38,18 @@ Este documento detalha os agentes e suas responsabilidades específicas dentro d
 - **Entidades Gerenciadas:** User (com `role`, `hashed_password`), Product (com `price_cost`, `quantity`, `min_stock_level`, `history`).
 - **Operações:** CRUD básico (create, read, update, delete).
 
+## CORS
+- **Implementado CORS no FastAPI (`main.py`) para resolver erro 405 OPTIONS e permitir acesso do frontend.**
+- `CORSMiddleware` adicionado logo após a inicialização do `FastAPI()`, antes dos routers.
+- Origins permitidas: `http://localhost:5173`, `http://127.0.0.1:5173` (Vite dev server).
+- `allow_credentials=True`, `allow_methods=["*"]`, `allow_headers=["*"]`.
+- Futuro: considerar mover `allow_origins` para variável de ambiente (`CORS_ORIGINS`) em produção.
+
 ## Agente de Testes do Backend
 - **Responsabilidade Principal:**
     - Execução e validação de testes unitários e de integração.
     - Geração de relatórios de cobertura de código.
-- **Cobertura Atual:** 100% (71 testes).
+- **Cobertura Atual:** 100% (125 testes).
 - **Tecnologias:** Pytest, Pytest-cov.
-- **Arquivos de Teste:** `tests/test_auth.py`, `tests/test_deps.py`, `tests/test_products.py`, `tests/test_models.py`, `tests/test_crud.py`, `tests/test_database.py`, `test_main.py`.
+- **Arquivos de Teste:** `tests/test_auth.py`, `tests/test_deps.py`, `tests/test_products.py`, `tests/test_models.py`, `tests/test_crud.py`, `tests/test_database.py`, `tests/test_admin.py`, `tests/test_users.py`, `tests/test_seed_admin.py`, `test_main.py`.
+- **Testes CORS adicionados em `tests/test_auth.py`:** `test_options_login_not_405`, `test_login_success_returns_token`, `test_login_invalid_credentials_returns_401`.

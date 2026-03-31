@@ -114,3 +114,36 @@ def test_get_current_user_missing_sub(client: TestClient):
     token = create_access_token(data={"data": "no_sub"})
     response = client.get("/products", headers={"Authorization": f"Bearer {token}"})
     assert response.status_code == 401
+
+
+def test_options_login_not_405(client: TestClient):
+    response = client.options(
+        "/auth/login",
+        headers={
+            "Origin": "http://localhost:5173",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
+        },
+    )
+    assert response.status_code != 405
+
+
+def test_login_success_returns_token(client: TestClient, session: Session):
+    make_user(session, "cors_user@example.com", "securepass")
+    response = client.post(
+        "/auth/login",
+        json={"email": "cors_user@example.com", "password": "securepass"},
+        headers={"Origin": "http://localhost:5173"},
+    )
+    assert response.status_code == 200
+    assert "access_token" in response.json()
+
+
+def test_login_invalid_credentials_returns_401(client: TestClient, session: Session):
+    make_user(session, "cors_invalid@example.com", "correctpass")
+    response = client.post(
+        "/auth/login",
+        json={"email": "cors_invalid@example.com", "password": "wrongpass"},
+        headers={"Origin": "http://localhost:5173"},
+    )
+    assert response.status_code == 401
