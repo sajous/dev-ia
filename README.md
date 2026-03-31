@@ -66,8 +66,19 @@ Este projeto utiliza uma arquitetura de agentes para otimizar o desenvolvimento 
     - [ ] Registro de Pedidos
     - [ ] Gestão de Clientes
     - [ ] Processamento de Pagamentos
-- [x] **Módulo de RH:**
+- [x] **Módulo de RH:** ✅ Concluído
     - [x] Admin de Usuários (Visualização)
-    - [ ] Cadastro de Funcionários
+    - [x] Cadastro de Funcionários (CRUD completo com RBAC)
+    - [x] Controle de Acesso por Role (OWNER, HR_MANAGER, STOCK, SALES)
+    - [x] Script de Semente para Super Administrador
+    - [x] Página de Gestão de RH (Frontend com proteção de rota)
     - [ ] Gestão de Folha de Pagamento
-    - [ ] Controle de Acesso e Permissões Avançado
+
+### Acesso Inicial
+
+Após a configuração inicial e execução do script de semente, você pode acessar o sistema com as seguintes credenciais de Super Administrador:
+
+- **Email**: `admin@sistema.com`
+- **Senha**: `admin123`
+
+Este usuário tem a role `OWNER` e acesso completo às funcionalidades de gestão de RH.

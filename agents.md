@@ -31,3 +31,14 @@ Este documento descreve os agentes de alto nível e suas responsabilidades dentr
 - **Interage com:** Claude Code, Backend Agent, Frontend Agent.
 
 **Nota:** As responsabilidades específicas de cada camada (backend/frontend) são detalhadas em seus respectivos arquivos `agents.md`.
+
+## Entregas Recentes
+
+- **Módulo de Gestão de RH (2026-03-30)**
+  - Role `OWNER` adicionada ao enum de roles
+  - Script `seed_admin.py` com hashing bcrypt e logger
+  - CRUD completo `/users` com RBAC (OWNER, HR_MANAGER, ADMIN)
+  - Proteção: não deletar próprio usuário, não deletar último admin
+  - Página `HRManagementPage` com tabela paginada e formulário de contratação
+  - Rota `/hr-management` protegida por role no frontend
+  - 100% coverage em backend (121 testes) e frontend (76 testes)
