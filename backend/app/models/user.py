@@ -5,6 +5,7 @@ from sqlmodel import SQLModel, Field
 
 
 class Role(str, Enum):
+    OWNER = "OWNER"
     ADMIN = "ADMIN"
     STOCK_STAFF = "STOCK_STAFF"
     STOCK_MANAGER = "STOCK_MANAGER"
