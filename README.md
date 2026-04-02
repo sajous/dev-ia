@@ -62,8 +62,11 @@ Este projeto utiliza uma arquitetura de agentes para otimizar o desenvolvimento 
     - [ ] Cadastro de Produtos (Formulário e API)
     - [ ] Edição e Exclusão de Produtos
     - [ ] Relatórios de Inventário
-- [ ] **Módulo de Vendas:**
-    - [ ] Registro de Pedidos
+- [x] **Módulo de Vendas e PDV:** ✅ Concluído
+    - [x] Terminal PDV (`/pdv`) com busca de produtos e carrinho de vendas
+    - [x] API `POST /sales` com transação atômica e verificação de estoque
+    - [x] API `GET /sales` com filtragem por role (SALES_MANAGER/OWNER/SALES_STAFF)
+    - [x] Busca de produtos por nome ou SKU (`GET /products?search=...`)
     - [ ] Gestão de Clientes
     - [ ] Processamento de Pagamentos
 - [x] **Módulo de RH:** ✅ Concluído

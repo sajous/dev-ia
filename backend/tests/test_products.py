@@ -120,13 +120,44 @@ def test_get_products_unauthenticated(client: TestClient):
     assert response.status_code == 401
 
 
-def test_get_products_sales_staff_returns_staff_view(client: TestClient, session: Session):
+def test_get_products_sales_staff_returns_pdv_view(client: TestClient, session: Session):
     token = make_token(session, Role.SALES_STAFF, "get_sales")
     make_product(session, "sales-view")
     response = client.get("/products", headers={"Authorization": f"Bearer {token}"})
     assert response.status_code == 200
     item = response.json()[0]
-    assert "price_cost" not in item
+    assert "price_cost" in item
+    assert "min_stock_level" not in item
+
+
+def test_get_products_search_filters_by_name(client: TestClient, session: Session):
+    token = make_token(session, Role.STOCK_STAFF, "search_name")
+    make_product(session, "alpha")
+    make_product(session, "beta")
+    response = client.get("/products?search=alpha", headers={"Authorization": f"Bearer {token}"})
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) == 1
+    assert data[0]["sku"] == "PROD-alpha"
+
+
+def test_get_products_search_filters_by_sku(client: TestClient, session: Session):
+    token = make_token(session, Role.STOCK_STAFF, "search_sku")
+    make_product(session, "gamma")
+    make_product(session, "delta")
+    response = client.get("/products?search=PROD-delta", headers={"Authorization": f"Bearer {token}"})
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) == 1
+    assert data[0]["sku"] == "PROD-delta"
+
+
+def test_get_products_search_no_match(client: TestClient, session: Session):
+    token = make_token(session, Role.STOCK_STAFF, "search_none")
+    make_product(session, "epsilon")
+    response = client.get("/products?search=zzznomatch", headers={"Authorization": f"Bearer {token}"})
+    assert response.status_code == 200
+    assert response.json() == []
 
 
 def test_patch_product_stock_manager_success(client: TestClient, session: Session):
