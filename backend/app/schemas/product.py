@@ -44,3 +44,13 @@ class ProductManagerViewSchema(BaseModel):
     history: Optional[str] = None
 
     model_config = {"from_attributes": True}
+
+
+class ProductPdvViewSchema(BaseModel):
+    id: int
+    name: str
+    sku: str
+    quantity: int
+    price_cost: Decimal
+
+    model_config = {"from_attributes": True}

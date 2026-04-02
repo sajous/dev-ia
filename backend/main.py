@@ -5,6 +5,8 @@ from app.api.auth import router as auth_router
 from app.api.products import router as products_router
 from app.api.admin import router as admin_router
 from app.api.users import router as users_router
+from app.api.sales import router as sales_router
+import app.models.sale  # noqa: F401
 
 aplicacao = FastAPI()
 
@@ -31,3 +33,4 @@ aplicacao.include_router(auth_router)
 aplicacao.include_router(products_router)
 aplicacao.include_router(admin_router)
 aplicacao.include_router(users_router)
+aplicacao.include_router(sales_router)

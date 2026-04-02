@@ -20,8 +20,13 @@ def get_product_by_sku(session: Session, sku: str) -> Optional[Product]:
     return session.exec(statement).first()
 
 
-def get_products(session: Session, offset: int = 0, limit: int = 100) -> list[Product]:
-    statement = select(Product).offset(offset).limit(limit)
+def get_products(session: Session, offset: int = 0, limit: int = 100, search: str | None = None) -> list[Product]:
+    statement = select(Product)
+    if search:
+        statement = statement.where(
+            (Product.name.ilike(f"%{search}%")) | (Product.sku.ilike(f"%{search}%"))
+        )
+    statement = statement.offset(offset).limit(limit)
     return list(session.exec(statement).all())
 
 
